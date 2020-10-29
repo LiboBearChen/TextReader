@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 
 <head>
@@ -90,7 +90,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <ul class="list-unstyled mb-0" id="stats">
-                                    
+                                    <li id="docLength"></li>
+                                    <li id="wordCount"></li>
+                                    <li id="charCount"></li>
                                 </ul>
                             </div>
                         </div>
@@ -99,7 +101,13 @@
             </div>
         </div>
     </div>
-    </div>
+    
+    <script id="template-ul-items" type="text/template">
+        <li>
+            {{ val }}
+        </li>
+    </script>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
