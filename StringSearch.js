@@ -31,4 +31,32 @@ function getDocStats(fileContent) {
 
     let text = fileContent.toLowerCase();
     let wordArray = text.match(/\b\S+\b/g);
+    let wordDictionary = {};
+
+    for (let word in wordArray) {
+        let wordValue = wordArray[word];
+        if (wordDictionary[wordValue] > 0) {
+            wordDictionary[wordValue] += 1;
+        }
+        else {
+            wordDictionary[wordValue] = 1;
+        }
+    }
+
+    let wordList = sortProperties(wordDictionary);
+
+    var top5Words = wordList.slice(0, 6);
+    var least5Words = wordList.slice(-6, wordList.length);
+
+
+}
+
+function sortProperties(obj) {
+    let rtnArray = Object.defineProperties(obj);
+
+    rtnArray.sort(function (first, second) {
+        return second[1] - first[1];
+    });
+
+    return rtnArray;
 }
