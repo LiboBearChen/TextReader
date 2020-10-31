@@ -12,7 +12,9 @@ function loadBook(fileName,displayName){
 
     xhr.onreadystatechange=function(){
         if(xhr.readyState==4 && xhr.status==200){
-            currentBook=xhr.responseText;
+            currentBook = xhr.responseText;
+
+            getDocStats(currentBook);
 
             currentBook = currentBook.replace(/(?:\r\n|\r|\n)/g, '<br>');
 
@@ -48,7 +50,20 @@ function getDocStats(fileContent) {
     var top5Words = wordList.slice(0, 6);
     var least5Words = wordList.slice(-6, wordList.length);
 
+    ULTemplate(top5Words, document.getElementById("mostUsed"));
+    ULTemplate(least5Words, document.getElementById("leastUsed"));
+}
 
+function ULTemplate(items, element) {
+    let rowTemplate = document.getElementById('template-ul-items');
+    let templateHTML = rowTemplate.innerHTML;
+    let resultsHTML = "";
+
+    for (i = 0; i < items.length - 1; i++) {
+        resultsHTML += templateHTML.replace('{{val}}', items[i][0] + " : " + items[i][1] + " time(s)");
+    }
+
+    element.innerHTML = resultsHTML;
 }
 
 function sortProperties(obj) {
