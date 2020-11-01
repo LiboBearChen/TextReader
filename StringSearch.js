@@ -35,13 +35,13 @@ function getDocStats(fileContent) {
     let wordArray = text.match(/\b\S+\b/g);
     let wordDictionary = {};
 
-    for (let word in wordArray) {
-        let wordValue = wordArray[word];
-        if (wordDictionary[wordValue] > 0) {
-            wordDictionary[wordValue] += 1;
+    for (const word of wordArray) {
+        
+        if (wordDictionary[word] > 0) {
+            wordDictionary[word] += 1;
         }
         else {
-            wordDictionary[wordValue] = 1;
+            wordDictionary[word] = 1;
         }
     }
 
@@ -55,19 +55,18 @@ function getDocStats(fileContent) {
 }
 
 function ULTemplate(items, element) {
-    let rowTemplate = document.getElementById('template-ul-items');
-    let templateHTML = rowTemplate.innerHTML;
     let resultsHTML = "";
 
     for (i = 0; i < items.length - 1; i++) {
-        resultsHTML += templateHTML.replace('{{val}}', items[i][0] + " : " + items[i][1] + " time(s)");
+            resultsHTML += "<li>" + items[i][0] + " : " + items[i][1] + " time(s) </li>";
     }
 
     element.innerHTML = resultsHTML;
 }
 
 function sortProperties(obj) {
-    let rtnArray = Object.defineProperties(obj);
+
+    let rtnArray = Object.entries(obj);
 
     rtnArray.sort(function (first, second) {
         return second[1] - first[1];
