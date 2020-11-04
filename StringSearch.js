@@ -119,10 +119,16 @@ function performMark() {
 
     var re = new RegExp(keyword, "gi");
     var replaceText = "<mark id='markme'>$&</mark>";
-    var bookContent = diaplay.innerHTML;
+    var bookContent = display.innerHTML;
 
     newcontent = bookContent.replace(re, replaceText);
 
     display.innerHTML = newcontent;
     var count = document.querySelectorAll('mark').length;
+    document.getElementById("searchstat").innerHTML = "found " + count + " matches";
+
+    if (count > 0) {
+        var element = document.getElementById("markme");
+        element.scrollIntoView();
+    }
 }
